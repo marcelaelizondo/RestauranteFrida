@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Header } from './components/Header';
 import { ProductList } from './components/ProductList';
+import  ChartComponent  from "./components/totalRoutes";
+import ChartComponentAveSpeed from "./components/avgSpeed";
+import ChartTotalDistance from "./components/totalDistance";
 
 const Login = () => {
   return (
@@ -123,6 +126,14 @@ const App = () => {
         );
       case "makePayment":
         return <MakePayment />;
+      case "totalRoutes":
+        return (
+          <>
+            <ChartComponent />
+            <ChartComponentAveSpeed />
+            <ChartTotalDistance />
+          </>
+        );
       default:
         return null;
     }
@@ -140,10 +151,13 @@ const App = () => {
         <button className="btn-clear-all" onClick={() => setPage("makePayment")}>
           Make Payment
         </button>
+        <button className="btn-clear-all" onClick={() => setPage("totalRoutes")}>
+          GTX
+        </button>
       </header>
-
       {getContent()}
     </div>
+    
   );
 };
 
