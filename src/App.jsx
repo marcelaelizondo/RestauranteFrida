@@ -6,6 +6,8 @@ const Login = () => {
   return (
     <>
       <h1>Login</h1>
+      
+
     </>
   );
 };
@@ -67,7 +69,7 @@ const MakePayment = () => {
         }}
       >
 		<h1 style={{fontFamily: 'Roboto, sans-serif'}}>Tu total es: </h1>
-	  <h2> $ </h2>
+	  <h2> $ 120</h2>
 	  <br />
 	  <br />
         {!isPayPalReady && <p>Cargando opciones de pago...</p>}
@@ -91,7 +93,7 @@ const App = () => {
 	const [countProducts, setCountProducts] = useState(0);
 
 //define que page=products
-  const [page, setPage] = useState("products");
+  const [page, setPage] = useState("login");
 
   const getContent = () => {
     switch (page) {
