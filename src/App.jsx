@@ -5,13 +5,65 @@ import  ChartComponent  from "./components/totalRoutes";
 import ChartComponentAveSpeed from "./components/avgSpeed";
 import ChartTotalDistance from "./components/totalDistance";
 
-const Login = () => {
-  return (
-    <>
-      <h1>Login</h1>
-      
+var admin = false;
+var flag = false;
 
-    </>
+const Login = ({ onLoginSuccess }) => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleLogin = () => {
+    fetch("http://35.208.18.75:5000/set", {
+      method: "post",
+      body: JSON.stringify({
+        user: username,
+        pass: password,
+      }),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
+    })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data);
+      if (data.success) {
+        admin = data.isAdmin;
+        onLoginSuccess();
+      }
+    })
+    .catch((error) => console.error("Error:", error));
+  };
+
+  return (
+    <div className="Login">
+      <div className="login-container">
+        <h2 className="login-h2">Login</h2>
+        <form className="login-form">
+          <label className="login-label">
+            Usuario:<br />
+            <input
+              className="login-input"
+              type="text"
+              onChange={(e) => setUsername(e.target.value)}
+            />
+          </label>
+          <br />
+          <label className="login-label">
+            Contraseña:<br />
+            <input
+              className="login-input"
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </label>
+          <br />
+          <button className="login-button" type="button" onClick={handleLogin}>
+            Iniciar sesión
+          </button>
+        </form>
+      </div>
+    </div>
   );
 };
 
@@ -98,11 +150,16 @@ const App = () => {
 //define que page=products
   const [page, setPage] = useState("login");
 
+  const handleLoginSuccess = () => {
+    setPage("products");
+  };
+
   const getContent = () => {
     switch (page) {
       case "login":
-        return <Login />;
+        return <Login onLoginSuccess={handleLoginSuccess} />;
       case "products":
+        flag = false;
         return (
 			<>
 			<Header
@@ -127,13 +184,18 @@ const App = () => {
       case "makePayment":
         return <MakePayment />;
       case "totalRoutes":
-        return (
-          <>
-            <ChartComponent />
-            <ChartComponentAveSpeed />
-            <ChartTotalDistance />
-          </>
-        );
+        if(admin){
+          return (
+            <>
+              <ChartComponent />
+              <ChartComponentAveSpeed />
+              <ChartTotalDistance />
+            </>
+          );
+        }
+        else{
+          setPage("products")
+        }
       default:
         return null;
     }
@@ -141,20 +203,16 @@ const App = () => {
 
   return (
     <div>
-      <header>
-        <button className="btn-clear-all" onClick={() => setPage("login")}>
-          Login
-        </button>
-        <button className="btn-clear-all" onClick={() => setPage("products")}>
-          Products
-        </button>
-        <button className="btn-clear-all" onClick={() => setPage("makePayment")}>
-          Make Payment
-        </button>
-        <button className="btn-clear-all" onClick={() => setPage("totalRoutes")}>
-          GTX
-        </button>
-      </header>
+      {page !== "login" && (
+        <header>
+          <button className="btn-clear-all" onClick={() => setPage("products")}>
+            Products
+          </button>
+          <button className="btn-clear-all" onClick={() => setPage("totalRoutes")}>
+            GTX
+          </button>
+        </header>
+      )}
       {getContent()}
     </div>
     
