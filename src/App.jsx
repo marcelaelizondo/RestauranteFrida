@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Header } from './components/Header';
 import { ProductList } from './components/ProductList';
-import  ChartComponent  from "./components/totalRoutes";
+import ChartComponent from "./components/totalRoutes";
 import ChartComponentAveSpeed from "./components/avgSpeed";
 import ChartTotalDistance from "./components/totalDistance";
 
@@ -23,45 +23,59 @@ const Login = ({ onLoginSuccess }) => {
         "Content-type": "application/json; charset=UTF-8",
       },
     })
-    .then((response) => response.json())
-    .then((data) => {
-      console.log(data);
-      if (data.success) {
-        admin = data.isAdmin;
-        onLoginSuccess();
-      }
-    })
-    .catch((error) => console.error("Error:", error));
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        if (data.success) {
+          admin = data.isAdmin;
+          onLoginSuccess();
+        }
+      })
+      .catch((error) => console.error("Error:", error));
   };
 
   return (
-    <div className="Login">
-      <div className="login-container">
-        <h2 className="login-h2">Login</h2>
-        <form className="login-form">
-          <label className="login-label">
-            Usuario:<br />
-            <input
-              className="login-input"
-              type="text"
-              onChange={(e) => setUsername(e.target.value)}
-            />
-          </label>
-          <br />
-          <label className="login-label">
-            Contraseña:<br />
-            <input
-              className="login-input"
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </label>
-          <br />
-          <button className="login-button" type="button" onClick={handleLogin}>
-            Iniciar sesión
-          </button>
-        </form>
+    <div>
+      <div class="div-con-titulo">
+        <br />
+        <br />
+        <br />
+        <br />
+      </div>
+      <div>
+        <h2 class="titulo-roboto">La Cocina de Frida Restaurante🌮</h2>
+        <br />
+      </div>
+
+
+      <div className="Login">
+        <div className="login-container">
+          <h2 className="login-h2">Login</h2>
+          <form className="login-form">
+            <label className="login-label">
+              Usuario:<br />
+              <input
+                className="login-input"
+                type="text"
+                onChange={(e) => setUsername(e.target.value)}
+              />
+            </label>
+            <br />
+            <label className="login-label">
+              Contraseña:<br />
+              <input
+                className="login-input"
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </label>
+            <br />
+            <button className="login-button" type="button" onClick={handleLogin}>
+              Iniciar sesión
+            </button>
+          </form>
+        </div>
       </div>
     </div>
   );
@@ -108,32 +122,32 @@ const MakePayment = () => {
 
   return (
     <>
-      
-	  
 
-	  <div style={{ display: "flex", justifyContent: "center", alignItems: "center"}}>
-      <div
-        id="paypal-button-container"
-        style={{
-          textAlign: "center",
-          width: "500px",
-          padding: "20px",
-          borderRadius: "10px",
-          boxShadow: "0px 0px 10px 0px rgba(0, 0, 0, 0.1)",
-          backgroundColor: "#f8f9fa", // Puedes cambiar esto al color que prefieras
-        }}
-      >
-		<h1 style={{fontFamily: 'Roboto, sans-serif'}}>Tu total es: </h1>
-	  <h2> $ 120</h2>
-	  <br />
-	  <br />
-        {!isPayPalReady && <p>Cargando opciones de pago...</p>}
-        {/* Agrega el contenido de PayPal aquí cuando esté listo */}
+
+
+      <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+        <div
+          id="paypal-button-container"
+          style={{
+            textAlign: "center",
+            width: "500px",
+            padding: "20px",
+            borderRadius: "10px",
+            boxShadow: "0px 0px 10px 0px rgba(0, 0, 0, 0.1)",
+            backgroundColor: "#f8f9fa", // Puedes cambiar esto al color que prefieras
+          }}
+        >
+          <h1 style={{ fontFamily: 'Roboto, sans-serif' }}>Tu total es: </h1>
+          <h2> $ 120</h2>
+          <br />
+          <br />
+          {!isPayPalReady && <p>Cargando opciones de pago...</p>}
+          {/* Agrega el contenido de PayPal aquí cuando esté listo */}
+        </div>
       </div>
-    </div>
 
-	  
-      
+
+
     </>
   );
 };
@@ -142,12 +156,12 @@ const MakePayment = () => {
 
 
 const App = () => {
-  
-  const [allProducts, setAllProducts] = useState([]);
-	const [total, setTotal] = useState(0);
-	const [countProducts, setCountProducts] = useState(0);
 
-//define que page=products
+  const [allProducts, setAllProducts] = useState([]);
+  const [total, setTotal] = useState(0);
+  const [countProducts, setCountProducts] = useState(0);
+
+  //define que page=products
   const [page, setPage] = useState("login");
 
   const handleLoginSuccess = () => {
@@ -161,30 +175,30 @@ const App = () => {
       case "products":
         flag = false;
         return (
-			<>
-			<Header
-				allProducts={allProducts}
-				setAllProducts={setAllProducts}
-				total={total}
-				setTotal={setTotal}
-				countProducts={countProducts}
-				setCountProducts={setCountProducts}
-			/>
-			<ProductList
-				allProducts={allProducts}
-				setAllProducts={setAllProducts}
-				total={total}
-				setTotal={setTotal}
-				countProducts={countProducts}
-				setCountProducts={setCountProducts}
-			/>
-			
-		</>
+          <>
+            <Header
+              allProducts={allProducts}
+              setAllProducts={setAllProducts}
+              total={total}
+              setTotal={setTotal}
+              countProducts={countProducts}
+              setCountProducts={setCountProducts}
+            />
+            <ProductList
+              allProducts={allProducts}
+              setAllProducts={setAllProducts}
+              total={total}
+              setTotal={setTotal}
+              countProducts={countProducts}
+              setCountProducts={setCountProducts}
+            />
+
+          </>
         );
       case "makePayment":
         return <MakePayment />;
       case "totalRoutes":
-        if(admin){
+        if (admin) {
           return (
             <>
               <ChartComponent />
@@ -193,7 +207,7 @@ const App = () => {
             </>
           );
         }
-        else{
+        else {
           setPage("products")
         }
       default:
@@ -215,7 +229,7 @@ const App = () => {
       )}
       {getContent()}
     </div>
-    
+
   );
 };
 

@@ -277,6 +277,7 @@ header {
   .login-h2 {
 	text-align: center;
 	color: #333;
+	font-family: 'Roboto', sans-serif;
   }
   
   .login-form {
@@ -287,6 +288,7 @@ header {
   
   .login-label {
 	text-align: center;
+	font-family: 'Roboto', sans-serif;
 	margin-bottom: 5px;
   }
   
@@ -309,4 +311,22 @@ header {
   
   .login-button:hover {
 	background-color: #2980b9;
+  }
+
+  .titulo-roboto {
+	font-family: 'Roboto', sans-serif;
+	font-size: 40px;
+	color: #000000; 
+	text-align: center;
+  	z-index: 1;
+  }
+
+  .div-con-titulo {
+	margin: 50px;
+	background-image: url('https://www.mamalatinatips.com/wp-content/uploads/2022/05/chilaquiles-rojos-22.jpg');
+	background-size: cover; 
+	background-position: center; 
+	background-repeat: no-repeat; 
+	padding: 20px; 
+	color: #fff; 
   }
